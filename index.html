@@ -16,6 +16,9 @@
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  
+  <!-- Material Icons for Google Reviews -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -37,6 +40,804 @@
 <style>
   .pt-75{
     padding-top: 75px !important;
+  }
+
+  /* Google Reviews Component Styles */
+  .google-reviews-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px 16px;
+    background: #fff;
+  }
+
+  .reviews-header {
+    margin-bottom: 24px;
+  }
+
+  .header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .reviews-title {
+    font-size: 20px;
+    font-weight: 500;
+    color: #202124;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+  }
+
+  .google-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .write-review-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #1a73e8;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-height: 36px;
+  }
+
+  .write-review-btn:hover {
+    background: #1557b0;
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+  }
+
+  .write-review-btn .material-icons {
+    font-size: 18px;
+  }
+
+  .overall-rating {
+    padding: 16px 0;
+    border-bottom: 1px solid #e8eaed;
+  }
+
+  .rating-summary {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .rating-score {
+    font-size: 32px;
+    font-weight: 400;
+    color: #202124;
+  }
+
+  .rating-stars {
+    display: flex;
+    gap: 2px;
+  }
+
+  .star {
+    font-size: 20px;
+    color: #dadce0;
+  }
+
+  .star.filled {
+    color: #fbbc04;
+  }
+
+  .rating-count {
+    font-size: 14px;
+    color: #5f6368;
+    margin-left: auto;
+  }
+
+  .google-reviews-list {
+    display: grid;
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .google-review-card {
+    background: #fff;
+    border: 1px solid #e8eaed;
+    border-radius: 8px;
+    padding: 16px;
+    transition: box-shadow 0.2s ease;
+  }
+
+  .google-review-card:hover {
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+  }
+
+  .google-review-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .google-reviewer-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #1a73e8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 500;
+    font-size: 14px;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  .google-reviewer-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .google-review-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .google-reviewer-name {
+    font-size: 16px;
+    font-weight: 500;
+    color: #202124;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .verified-badge {
+    background: #34a853;
+    color: #fff;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .google-review-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+
+  .google-review-stars {
+    display: flex;
+    gap: 1px;
+  }
+
+  .google-review-stars .star {
+    font-size: 14px;
+  }
+
+  .google-review-date {
+    font-size: 12px;
+    color: #5f6368;
+  }
+
+  .google-review-text {
+    font-size: 14px;
+    line-height: 1.4;
+    color: #202124;
+    word-wrap: break-word;
+  }
+
+  .loading-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 16px;
+    color: #5f6368;
+  }
+
+  .loading-spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid #e8eaed;
+    border-top: 3px solid #1a73e8;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 16px;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 48px 16px;
+    color: #5f6368;
+  }
+
+  .empty-icon .material-icons {
+    font-size: 48px;
+    color: #dadce0;
+    margin-bottom: 16px;
+  }
+
+  /* Modal Styles */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(32, 33, 36, 0.6);
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 16px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+  }
+
+  .modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .modal-content {
+    background: #fff;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 480px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
+    transform: scale(0.9);
+    transition: transform 0.2s ease;
+  }
+
+  .modal-overlay.active .modal-content {
+    transform: scale(1);
+  }
+
+  .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid #e8eaed;
+  }
+
+  .modal-header h3 {
+    font-size: 20px;
+    font-weight: 500;
+    color: #202124;
+    margin: 0;
+  }
+
+  .close-btn {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    color: #5f6368;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+  }
+
+  .close-btn:hover {
+    background: #f1f3f4;
+  }
+
+  .close-btn .material-icons {
+    font-size: 20px;
+  }
+
+  .review-form {
+    padding: 24px;
+  }
+
+  .form-group {
+    margin-bottom: 24px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #202124;
+    margin-bottom: 8px;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: inherit;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    background: #fff;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: #1a73e8;
+    box-shadow: 0 0 0 1px #1a73e8;
+  }
+
+  .form-group small {
+    display: block;
+    font-size: 12px;
+    color: #5f6368;
+    margin-top: 4px;
+  }
+
+  .star-rating-input {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 8px;
+  }
+
+  .star-input {
+    font-size: 28px;
+    color: #dadce0;
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.1s ease;
+    user-select: none;
+  }
+
+  .star-input:hover,
+  .star-input.active {
+    color: #fbbc04;
+    transform: scale(1.1);
+  }
+
+  .star-input.filled {
+    color: #fbbc04;
+  }
+
+  .char-counter {
+    text-align: right;
+    font-size: 12px;
+    color: #5f6368;
+    margin-top: 4px;
+  }
+
+  .char-counter.warning {
+    color: #ea4335;
+  }
+
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 32px;
+    padding-top: 16px;
+    border-top: 1px solid #e8eaed;
+  }
+
+  .cancel-btn {
+    background: none;
+    border: 1px solid #dadce0;
+    color: #1a73e8;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-height: 36px;
+  }
+
+  .cancel-btn:hover {
+    background: #f8f9fa;
+    border-color: #1a73e8;
+  }
+
+  .submit-btn {
+    background: #1a73e8;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-height: 36px;
+    min-width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .submit-btn:hover:not(:disabled) {
+    background: #1557b0;
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+  }
+
+  .submit-btn:disabled {
+    background: #dadce0;
+    color: #5f6368;
+    cursor: not-allowed;
+  }
+
+  .spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid transparent;
+    border-top: 2px solid #fff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  .google-review-card.new-review {
+    animation: slideInFadeIn 0.5s ease-out;
+  }
+
+  @keyframes slideInFadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .success-message {
+    background: #e8f5e8;
+    color: #137333;
+    padding: 12px 16px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .success-message .material-icons {
+    color: #34a853;
+    font-size: 18px;
+  }
+
+  .error-message {
+    background: #fce8e6;
+    color: #d93025;
+    padding: 12px 16px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .error-message .material-icons {
+    color: #ea4335;
+    font-size: 18px;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .google-reviews-container {
+      padding: 16px;
+    }
+
+    .header-content {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+    }
+
+    .write-review-btn {
+      justify-content: center;
+      width: 100%;
+    }
+
+    .rating-summary {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .rating-count {
+      margin-left: 0;
+    }
+
+    .modal-overlay {
+      padding: 8px;
+      align-items: flex-end;
+    }
+
+    .modal-content {
+      max-width: 100%;
+      max-height: 95vh;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .review-form {
+      padding: 16px;
+    }
+
+    .form-actions {
+      flex-direction: column-reverse;
+      gap: 8px;
+    }
+
+    .cancel-btn,
+    .submit-btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  @media (min-width: 769px) {
+    .google-reviews-list {
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    }
+  }
+
+  /* Portfolio Section Styles */
+  .portfolio-filters {
+    padding: 0;
+    margin: 0 auto 35px auto;
+    list-style: none;
+    text-align: center;
+    background: #fff;
+    border-radius: 50px;
+    padding: 10px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  .portfolio-filters li {
+    cursor: pointer;
+    display: inline-block;
+    padding: 12px 20px;
+    margin: 3px;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1;
+    text-transform: uppercase;
+    color: #666;
+    transition: all ease-in-out 0.3s;
+    border-radius: 25px;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+  }
+
+  .portfolio-filters li:hover,
+  .portfolio-filters li.filter-active {
+    background: #4154f1;
+    color: #fff;
+    box-shadow: 0 3px 10px rgba(65, 84, 241, 0.3);
+  }
+
+  .portfolio-item {
+    margin-bottom: 30px;
+    display: flex;
+  }
+
+  .portfolio-content {
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 380px;
+    max-height: 420px;
+  }
+
+  .portfolio-content:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
+  }
+
+  .portfolio-content img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: all 0.4s ease;
+    border-radius: 15px 15px 0 0;
+  }
+
+  .portfolio-content:hover img {
+    transform: scale(1.05);
+  }
+
+  /* Enhanced alignment for 6-card grid */
+  .portfolio-container .row {
+    align-items: stretch;
+  }
+
+  .portfolio-container .portfolio-item {
+    display: flex;
+    align-items: stretch;
+  }
+
+  @media (min-width: 992px) {
+    .portfolio-container {
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+    
+    .portfolio-item {
+      flex: 0 0 33.333333%;
+      max-width: 33.333333%;
+    }
+  }
+
+  .portfolio-info {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 0 0 15px 15px;
+    position: relative;
+    min-height: 140px;
+  }
+
+  .portfolio-info h4 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #2c3e50;
+    line-height: 1.3;
+  }
+
+  .portfolio-info p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .portfolio-links {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 10px;
+  }
+
+  .portfolio-category {
+    font-size: 11px;
+    color: #4154f1;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .portfolio-info .preview-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: #4154f1;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+
+  .portfolio-info .preview-link:hover {
+    background: #2c42d1;
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(65, 84, 241, 0.4);
+  }
+
+  .portfolio-image-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px 15px 0 0;
+    cursor: pointer;
+  }
+
+  .portfolio-image-container img {
+    transition: transform 0.4s ease;
+    width: 100%;
+    height: auto;
+  }
+
+  .portfolio-image-container:hover img {
+    transform: scale(1.1);
+  }
+
+  .portfolio-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    transition: all 0.4s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px 15px 0 0;
+  }
+
+  .portfolio-overlay .preview-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: transparent;
+  }
+
+  @media (max-width: 768px) {
+    .portfolio-filters {
+      padding: 5px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .portfolio-filters li {
+      padding: 8px 12px;
+      margin: 2px;
+      font-size: 10px;
+      letter-spacing: 0.2px;
+    }
+    
+    .portfolio-content {
+      min-height: 340px;
+      max-height: 380px;
+    }
+    
+    .portfolio-content img {
+      height: 180px;
+    }
+    
+    .portfolio-info {
+      padding: 15px;
+      min-height: 120px;
+    }
+    
+    .portfolio-info h4 {
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+    
+    .portfolio-info p {
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
   }
 </style>
 </head>
@@ -60,7 +861,6 @@
           <li><a href="#about">About</a></li>
           <li><a href="#portfolio">Portfolio </a></li>
           <li><a href="#services">Services</a></li>
-          <li><a href="#pricing">Pricing</a></li>
           <!-- <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="#">Dropdown 1</a></li>
@@ -266,7 +1066,153 @@
 
     </section><!-- /About Section -->
 
-    <div class="light-background" id="portfolio"></div>
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio section light-background">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Our Portfolio</h2>
+        <p>Explore our recent projects and see how we've helped businesses transform their digital presence</p>
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
+            <ul id="portfolio-flters" class="portfolio-filters">
+              <li data-filter="*" class="filter-active">All Services</li>
+              <li data-filter=".filter-web">Web Development</li>
+              <li data-filter=".filter-software">Software Development</li>
+              <li data-filter=".filter-ai">AI Development</li>
+              <li data-filter=".filter-mobile">Mobile Apps</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row gy-4 portfolio-container justify-content-center" data-aos="fade-up" data-aos-delay="200">
+          
+          <!-- Row 1: Top 3 Cards -->
+          <!-- Custom Web Development -->
+          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+            <div class="portfolio-content h-100">
+              <div class="portfolio-image-container">
+                <img src="assets/img/portfolios/charity.png" class="img-fluid" alt="Charity Platform">
+                <div class="portfolio-overlay">
+                  <a href="assets/img/portfolios/charity.png" title="Charity Platform" data-gallery="portfolio-gallery-web" class="glightbox preview-link"></a>
+                </div>
+              </div>
+              <div class="portfolio-info">
+                <h4>Charity Platform</h4>
+                <p>Custom web platform for donation management with real-time tracking and reporting</p>
+                <div class="portfolio-links">
+                  <span class="portfolio-category">Custom Web Development</span>
+                  <a href="assets/img/portfolios/charity.png" title="View Details" data-gallery="portfolio-gallery-web" class="glightbox preview-link"><i class="bi bi-arrow-up-right"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Software Development -->
+          <div class="col-lg-4 col-md-6 portfolio-item filter-software">
+            <div class="portfolio-content h-100">
+              <div class="portfolio-image-container">
+                <img src="assets/img/portfolios/logistica.png" class="img-fluid" alt="Logistics Management System">
+                <div class="portfolio-overlay">
+                  <a href="assets/img/portfolios/logistica.png" title="Logistics Management System" data-gallery="portfolio-gallery-software" class="glightbox preview-link"></a>
+                </div>
+              </div>
+              <div class="portfolio-info">
+                <h4>Logistics Management System</h4>
+                <p>Enterprise software for supply chain management with real-time tracking and analytics</p>
+                <div class="portfolio-links">
+                  <span class="portfolio-category">Software Development</span>
+                  <a href="assets/img/portfolios/logistica.png" title="View Details" data-gallery="portfolio-gallery-software" class="glightbox preview-link"><i class="bi bi-arrow-up-right"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AI Development -->
+          <div class="col-lg-4 col-md-6 portfolio-item filter-ai">
+            <div class="portfolio-content h-100">
+              <div class="portfolio-image-container">
+                <img src="assets/img/portfolios/charifit.png" class="img-fluid" alt="AI-Powered Fitness Platform">
+                <div class="portfolio-overlay">
+                  <a href="assets/img/portfolios/charifit.png" title="AI-Powered Fitness Platform" data-gallery="portfolio-gallery-ai" class="glightbox preview-link"></a>
+                </div>
+              </div>
+              <div class="portfolio-info">
+                <h4>AI Fitness Coach</h4>
+                <p>Machine learning-powered fitness platform with personalized workout recommendations</p>
+                <div class="portfolio-links">
+                  <span class="portfolio-category">AI Development</span>
+                  <a href="assets/img/portfolios/charifit.png" title="View Details" data-gallery="portfolio-gallery-ai" class="glightbox preview-link"><i class="bi bi-arrow-up-right"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 2: Bottom 3 Cards -->
+          <!-- Custom Web Development -->
+          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+            <div class="portfolio-content h-100">
+              <div class="portfolio-image-container">
+                <img src="assets/img/portfolios/givehope.png" class="img-fluid" alt="Give Hope Platform">
+                <div class="portfolio-overlay">
+                  <a href="assets/img/portfolios/givehope.png" title="Give Hope Platform" data-gallery="portfolio-gallery-web" class="glightbox preview-link"></a>
+                </div>
+              </div>
+              <div class="portfolio-info">
+                <h4>Give Hope Portal</h4>
+                <p>Community support platform with volunteer management and event coordination</p>
+                <div class="portfolio-links">
+                  <span class="portfolio-category">Custom Web Development</span>
+                  <a href="assets/img/portfolios/givehope.png" title="View Details" data-gallery="portfolio-gallery-web" class="glightbox preview-link"><i class="bi bi-arrow-up-right"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Software Development -->
+          <div class="col-lg-4 col-md-6 portfolio-item filter-software">
+            <div class="portfolio-content h-100">
+              <div class="portfolio-image-container">
+                <img src="assets/img/portfolios/welfare.png" class="img-fluid" alt="Welfare Management System">
+                <div class="portfolio-overlay">
+                  <a href="assets/img/portfolios/welfare.png" title="Welfare Management System" data-gallery="portfolio-gallery-software" class="glightbox preview-link"></a>
+                </div>
+              </div>
+              <div class="portfolio-info">
+                <h4>Welfare Management System</h4>
+                <p>Government welfare distribution software with beneficiary tracking and reporting</p>
+                <div class="portfolio-links">
+                  <span class="portfolio-category">Software Development</span>
+                  <a href="assets/img/portfolios/welfare.png" title="View Details" data-gallery="portfolio-gallery-software" class="glightbox preview-link"><i class="bi bi-arrow-up-right"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mobile App Development -->
+          <div class="col-lg-4 col-md-6 portfolio-item filter-mobile">
+            <div class="portfolio-content h-100">
+              <div class="portfolio-image-container">
+                <img src="assets/img/portfolios/Anipat.png" class="img-fluid" alt="Anipat Mobile App">
+                <div class="portfolio-overlay">
+                  <a href="assets/img/portfolios/Anipat.png" title="Anipat Mobile App" data-gallery="portfolio-gallery-mobile" class="glightbox preview-link"></a>
+                </div>
+              </div>
+              <div class="portfolio-info">
+                <h4>Anipat Pet Care App</h4>
+                <p>Cross-platform mobile app for pet adoption and veterinary service booking</p>
+                <div class="portfolio-links">
+                  <span class="portfolio-category">Mobile App Development</span>
+                  <a href="assets/img/portfolios/Anipat.png" title="View Details" data-gallery="portfolio-gallery-mobile" class="glightbox preview-link"><i class="bi bi-arrow-up-right"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section><!-- /Portfolio Section -->
   
     <!-- Features Section -->
     <!-- Services Section -->
@@ -595,225 +1541,166 @@
 
     </section><!-- /Clients Section -->
 
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="testimonials section light-background">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Client Testimonials</h2>
-        <p>Don't just take our word for it - hear what our satisfied clients have to say about our services</p>
-      </div><!-- End Section Title -->
-
+    <!-- Google Reviews Section -->
+    <section id="testimonials" class="testimonials section" style="background-color: white;">
       <div class="container">
-
-        <div class="row g-5">
-
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="testimonial-item">
-              <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-              <h3>Sarah Johnson</h3>
-              <h4>CEO &amp; Founder, TechStart</h4>
-              <div class="stars">
-                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-              </div>
-              <p>
-                <i class="bi bi-quote quote-icon-left"></i>
-                <span>NS-Tech transformed our online presence completely. Their web development and SEO services helped us increase our leads by 300%. Professional, reliable, and results-driven.</span>
-                <i class="bi bi-quote quote-icon-right"></i>
-              </p>
+        <div class="google-reviews-container">
+          <!-- Google Reviews Header -->
+          <div class="reviews-header">
+            <div class="header-content">
+              <h2 class="reviews-title">
+                <span class="google-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24">
+                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                  </svg>
+                </span>
+                Google reviews
+              </h2>
+              <button class="write-review-btn" id="writeReviewBtn">
+                <span class="material-icons">edit</span>
+                Write a review
+              </button>
             </div>
-          </div><!-- End testimonial item -->
-
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="testimonial-item">
-              <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-              <h3>Michael Chen</h3>
-              <h4>Marketing Director</h4>
-              <div class="stars">
-                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+            
+            <!-- Overall Rating Display -->
+            <div class="overall-rating">
+              <div class="rating-summary">
+                <div class="rating-score">5.0</div>
+                <div class="rating-stars">
+                  <span class="star filled">★</span>
+                  <span class="star filled">★</span>
+                  <span class="star filled">★</span>
+                  <span class="star filled">★</span>
+                  <span class="star filled">★</span>
+                </div>
+                <div class="rating-count">Based on <span id="reviewCount">4</span> reviews</div>
               </div>
-              <p>
-                <i class="bi bi-quote quote-icon-left"></i>
-                <span>The custom software solution NS-Tech developed for us streamlined our entire workflow. Their attention to detail and technical expertise exceeded our expectations.</span>
-                <i class="bi bi-quote quote-icon-right"></i>
-              </p>
             </div>
-          </div><!-- End testimonial item -->
+          </div>
 
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="testimonial-item">
-              <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
-              <h3>Emily Rodriguez</h3>
-              <h4>E-commerce Owner</h4>
-              <div class="stars">
-                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+          <!-- Reviews List -->
+          <div class="google-reviews-list" id="reviewsList">
+            <!-- Initial reviews (will be replaced by Firebase data) -->
+            <div class="google-review-card">
+              <div class="google-review-header">
+                <div class="google-reviewer-avatar">
+                  <img src="assets/img/avatar-1.webp" alt="Rajesh Sharma">
+                </div>
+                <div class="google-review-info">
+                  <div class="google-reviewer-name">
+                    Rajesh Sharma
+                    <span class="verified-badge">Verified</span>
+                  </div>
+                  <div class="google-review-meta">
+                    <div class="google-review-stars">
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                    </div>
+                    <div class="google-review-date">1 month ago</div>
+                  </div>
+                </div>
               </div>
-              <p>
-                <i class="bi bi-quote quote-icon-left"></i>
-                <span>NS-Tech's graphic design and social media management services elevated our brand significantly. Our engagement rates doubled within three months of working with them.</span>
-                <i class="bi bi-quote quote-icon-right"></i>
-              </p>
+              <div class="google-review-text">Nice and amazing experience with expertise team outstanding work experience. They created a unique design tailored to my preferences and needs.</div>
             </div>
-          </div><!-- End testimonial item -->
 
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="testimonial-item">
-              <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
-              <h3>David Thompson</h3>
-              <h4>Business Consultant</h4>
-              <div class="stars">
-                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+            <div class="google-review-card">
+              <div class="google-review-header">
+                <div class="google-reviewer-avatar">
+                  <img src="assets/img/avatar-2.webp" alt="John Mitchell">
+                </div>
+                <div class="google-review-info">
+                  <div class="google-reviewer-name">
+                    John Mitchell
+                    <span class="verified-badge">Verified</span>
+                  </div>
+                  <div class="google-review-meta">
+                    <div class="google-review-stars">
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                    </div>
+                    <div class="google-review-date">6 months ago</div>
+                  </div>
+                </div>
               </div>
-              <p>
-                <i class="bi bi-quote quote-icon-left"></i>
-                <span>Outstanding service from start to finish. NS-Tech delivered a beautiful, functional website that perfectly represents our brand. Their ongoing support has been exceptional.</span>
-                <i class="bi bi-quote quote-icon-right"></i>
-              </p>
+              <div class="google-review-text">Exceptional service! The NS-Tech team delivered beyond our expectations. The website design is modern, responsive, and perfectly captures our brand identity.</div>
             </div>
-          </div><!-- End testimonial item -->
 
+            <div class="google-review-card">
+              <div class="google-review-header">
+                <div class="google-reviewer-avatar">
+                  <img src="assets/img/avatar-3.webp" alt="Priya Patel">
+                </div>
+                <div class="google-review-info">
+                  <div class="google-reviewer-name">
+                    Priya Patel
+                    <span class="verified-badge">Verified</span>
+                  </div>
+                  <div class="google-review-meta">
+                    <div class="google-review-stars">
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                    </div>
+                    <div class="google-review-date">7 months ago</div>
+                  </div>
+                </div>
+              </div>
+              <div class="google-review-text">Outstanding digital marketing services! Our online presence has improved dramatically. The team is professional, responsive, and delivers quality results on time.</div>
+            </div>
+
+            <div class="google-review-card">
+              <div class="google-review-header">
+                <div class="google-reviewer-avatar">
+                  <img src="assets/img/avatar-5.webp" alt="Amit Kumar">
+                </div>
+                <div class="google-review-info">
+                  <div class="google-reviewer-name">
+                    Amit Kumar
+                    <span class="verified-badge">Verified</span>
+                  </div>
+                  <div class="google-review-meta">
+                    <div class="google-review-stars">
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                    </div>
+                    <div class="google-review-date">2 months ago</div>
+                  </div>
+                </div>
+              </div>
+              <div class="google-review-text">Excellent web development services. The team understood our requirements perfectly and delivered a stunning e-commerce platform. Great support and maintenance too!</div>
+            </div>
+          </div>
+
+          <!-- Loading State -->
+          <div class="loading-state" id="loadingState" style="display: none;">
+            <div class="loading-spinner"></div>
+            <p>Loading reviews...</p>
+          </div>
+
+          <!-- Empty State -->
+          <div class="empty-state" id="emptyState" style="display: none;">
+            <div class="empty-icon">
+              <span class="material-icons">rate_review</span>
+            </div>
+            <p>No reviews yet. Be the first to write a review!</p>
+          </div>
         </div>
-
       </div>
-
-    </section><!-- /Testimonials Section -->
-
-    
-    
-
-    <!-- Pricing Section -->
-    <section id="pricing" class="pricing section light-background">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Service Packages</h2>
-        <p>Choose the perfect package for your business needs and budget</p>
-      </div><!-- End Section Title -->
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row g-4 justify-content-center">
-
-          <!-- Basic Plan -->
-          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
-            <div class="pricing-card">
-              <h3>Starter Package</h3>
-              <div class="price">
-                <span class="currency">₹</span>
-                <span class="amount">4,999</span>
-                <span class="period">/ project</span>
-              </div>
-              <p class="description">Perfect for small businesses looking to establish their online presence with professional web design.</p>
-
-              <h4>Package Includes:</h4>
-              <ul class="features-list">
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  5-page responsive website
-                </li>
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  Basic SEO optimization
-                </li>
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  Contact form integration
-                </li>
-              </ul>
-
-              <a href="#contact" class="btn btn-primary">
-                Get Started
-                <i class="bi bi-arrow-right"></i>
-              </a>
-            </div>
-          </div>
-
-          <!-- Standard Plan -->
-          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
-            <div class="pricing-card popular">
-              <div class="popular-badge">Most Popular</div>
-              <h3>Professional Package</h3>
-              <div class="price">
-                <span class="currency">₹</span>
-                <span class="amount">9,999</span>
-                <span class="period">/ project</span>
-              </div>
-              <p class="description">Comprehensive solution for growing businesses that need advanced features and ongoing support.</p>
-
-              <h4>Package Includes:</h4>
-              <ul class="features-list">
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  10-page custom website
-                </li>
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  Advanced SEO optimization
-                </li>
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  Social media integration
-                </li>
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  3 months support included
-                </li>
-              </ul>
-
-              <a href="#contact" class="btn btn-light">
-                Get Started
-                <i class="bi bi-arrow-right"></i>
-              </a>
-            </div>
-          </div>
-
-          <!-- Premium Plan -->
-          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
-            <div class="pricing-card">
-              <h3>Enterprise Package</h3>
-              <div class="price">
-                <span class="currency">₹</span>
-                <span class="amount">25,000</span>
-                <span class="period">/ project</span>
-              </div>
-              <p class="description">Complete digital transformation solution for large businesses with custom requirements.</p>
-
-              <h4>Package Includes:</h4>
-              <ul class="features-list">
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  Unlimited pages & features
-                </li>
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  Custom software development
-                </li>
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  Complete SEO & marketing setup
-                </li>
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  6 months premium support
-                </li>
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  Training & documentation
-                </li>
-              </ul>
-
-              <a href="#contact" class="btn btn-primary">
-                Get Started
-                <i class="bi bi-arrow-right"></i>
-              </a>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
-    </section><!-- /Pricing Section -->
+    </section><!-- /Google Reviews Section -->
 
     <!-- Faq Section -->
     <section class="faq-9 faq section light-background" id="faq">
@@ -1014,6 +1901,66 @@
 
   </main>
 
+  <!-- Review Modal -->
+  <div class="modal-overlay" id="reviewModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Write a review</h3>
+        <button class="close-btn" id="closeModalBtn">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+      
+      <form class="review-form" id="reviewForm">
+        <!-- Star Rating Input -->
+        <div class="form-group">
+          <label>Your rating</label>
+          <div class="star-rating-input" id="starRating">
+            <span class="star-input" data-rating="1">★</span>
+            <span class="star-input" data-rating="2">★</span>
+            <span class="star-input" data-rating="3">★</span>
+            <span class="star-input" data-rating="4">★</span>
+            <span class="star-input" data-rating="5">★</span>
+          </div>
+          <input type="hidden" id="ratingValue" name="rating" required>
+        </div>
+
+        <!-- Name Input -->
+        <div class="form-group">
+          <label for="reviewerName">Your name</label>
+          <input type="text" id="reviewerName" name="name" placeholder="Enter your name" required>
+        </div>
+
+        <!-- Profile Image URL (Optional) -->
+        <div class="form-group">
+          <label for="profileImageUrl">Profile image URL (optional)</label>
+          <input type="url" id="profileImageUrl" name="imageUrl" placeholder="https://example.com/image.jpg">
+          <small>Paste a link to your profile image</small>
+        </div>
+
+        <!-- Review Text -->
+        <div class="form-group">
+          <label for="reviewText">Your review</label>
+          <textarea id="reviewText" name="review" placeholder="Share your experience..." rows="4" required></textarea>
+          <div class="char-counter">
+            <span id="charCount">0</span>/500
+          </div>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="form-actions">
+          <button type="button" class="cancel-btn" id="cancelBtn">Cancel</button>
+          <button type="submit" class="submit-btn" id="submitBtn">
+            <span class="btn-text">Post review</span>
+            <span class="btn-spinner" style="display: none;">
+              <div class="spinner"></div>
+            </span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <footer id="footer" class="footer">
 
     <div class="container footer-top">
@@ -1114,13 +2061,9 @@
   <script src="assets/js/main.js"></script>
 
   <script>
-    fetch("portfolio.html").then(res => res.text()).then(data => {
-      document.getElementById("portfolio").innerHTML = data;
-      
-      // Small delay to ensure HTML is parsed before initializing
-      setTimeout(() => {
-        initializePortfolio();
-      }, 100);
+    // Portfolio initialization - runs after DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      initializePortfolio();
     });
     
     function initializePortfolio() {
@@ -1174,6 +2117,484 @@
         });
       }
     }
+  </script>
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    // Import Firebase modules
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
+    import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js';
+    
+    // TODO: Replace with your actual Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDOovg3MkyO4r-0BrHipww6N5_7kePRGCQ",
+    authDomain: "nstech-257ac.firebaseapp.com",
+    projectId: "nstech-257ac",
+    storageBucket: "nstech-257ac.firebasestorage.app",
+    messagingSenderId: "172497181399",
+    appId: "1:172497181399:web:8159de555f52e251026e92",
+    measurementId: "G-MNMNM9SJDC"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Make Firebase available globally
+    window.firebaseApp = app;
+    window.firebaseDb = db;
+  </script>
+
+  <!-- Google Reviews JavaScript -->
+  <script>
+    /**
+     * Google Reviews Component - JavaScript Implementation
+     */
+    class GoogleReviewsComponent {
+      constructor() {
+        this.reviews = [];
+        this.currentRating = 0;
+        this.isSubmitting = false;
+        this.db = null;
+        
+        // DOM element references
+        this.elements = {
+          modal: document.getElementById('reviewModal'),
+          writeReviewBtn: document.getElementById('writeReviewBtn'),
+          closeModalBtn: document.getElementById('closeModalBtn'),
+          cancelBtn: document.getElementById('cancelBtn'),
+          reviewForm: document.getElementById('reviewForm'),
+          starRating: document.getElementById('starRating'),
+          ratingValue: document.getElementById('ratingValue'),
+          reviewsList: document.getElementById('reviewsList'),
+          reviewCount: document.getElementById('reviewCount'),
+          loadingState: document.getElementById('loadingState'),
+          emptyState: document.getElementById('emptyState'),
+          reviewText: document.getElementById('reviewText'),
+          charCount: document.getElementById('charCount'),
+          submitBtn: document.getElementById('submitBtn')
+        };
+
+        this.init();
+      }
+
+      init() {
+        this.bindEvents();
+        this.initializeFirebase();
+        this.setupCharacterCounter();
+      }
+
+      async initializeFirebase() {
+        try {
+          // Wait for Firebase to be loaded
+          await this.waitForFirebase();
+          
+          // Import Firestore functions
+          const { collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } = await import('https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js');
+          
+          this.db = window.firebaseDb;
+          this.firestoreHelpers = { collection, addDoc, onSnapshot, query, orderBy, serverTimestamp };
+          
+          // Start listening for reviews
+          this.listenForReviews();
+        } catch (error) {
+          console.error('Firebase initialization error:', error);
+          console.log('Using static reviews - Firebase not configured');
+          // Keep static reviews if Firebase is not configured
+        }
+      }
+
+      waitForFirebase() {
+        return new Promise((resolve, reject) => {
+          const maxWait = 5000; // 5 seconds
+          const startTime = Date.now();
+
+          const check = () => {
+            if (window.firebaseDb) {
+              resolve();
+            } else if (Date.now() - startTime > maxWait) {
+              reject(new Error('Firebase loading timeout'));
+            } else {
+              setTimeout(check, 100);
+            }
+          };
+
+          check();
+        });
+      }
+
+      bindEvents() {
+        // Modal controls
+        this.elements.writeReviewBtn.addEventListener('click', () => this.openModal());
+        this.elements.closeModalBtn.addEventListener('click', () => this.closeModal());
+        this.elements.cancelBtn.addEventListener('click', () => this.closeModal());
+        
+        // Modal overlay click to close
+        this.elements.modal.addEventListener('click', (e) => {
+          if (e.target === this.elements.modal) {
+            this.closeModal();
+          }
+        });
+
+        // Form submission
+        this.elements.reviewForm.addEventListener('submit', (e) => this.handleSubmit(e));
+
+        // Star rating interaction
+        this.setupStarRating();
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && this.isModalOpen()) {
+            this.closeModal();
+          }
+        });
+      }
+
+      setupStarRating() {
+        const stars = this.elements.starRating.querySelectorAll('.star-input');
+        
+        stars.forEach((star, index) => {
+          star.addEventListener('mouseenter', () => this.highlightStars(index + 1));
+          star.addEventListener('mouseleave', () => this.highlightStars(this.currentRating));
+          star.addEventListener('click', () => this.selectRating(index + 1));
+          
+          star.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              this.selectRating(index + 1);
+            }
+          });
+          
+          star.setAttribute('tabindex', '0');
+        });
+      }
+
+      setupCharacterCounter() {
+        this.elements.reviewText.addEventListener('input', (e) => {
+          const length = e.target.value.length;
+          const maxLength = 500;
+          
+          this.elements.charCount.textContent = length;
+          
+          const counter = this.elements.charCount.parentElement;
+          if (length > maxLength * 0.8) {
+            counter.classList.add('warning');
+          } else {
+            counter.classList.remove('warning');
+          }
+          
+          if (length >= maxLength) {
+            e.target.value = e.target.value.substring(0, maxLength);
+            this.elements.charCount.textContent = maxLength;
+          }
+        });
+      }
+
+      highlightStars(rating) {
+        const stars = this.elements.starRating.querySelectorAll('.star-input');
+        stars.forEach((star, index) => {
+          if (index < rating) {
+            star.classList.add('filled');
+          } else {
+            star.classList.remove('filled');
+          }
+        });
+      }
+
+      selectRating(rating) {
+        this.currentRating = rating;
+        this.elements.ratingValue.value = rating;
+        this.highlightStars(rating);
+        
+        const stars = this.elements.starRating.querySelectorAll('.star-input');
+        stars.forEach((star, index) => {
+          star.classList.toggle('active', index < rating);
+        });
+      }
+
+      openModal() {
+        this.elements.modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        setTimeout(() => {
+          const firstInput = this.elements.reviewForm.querySelector('input, textarea');
+          if (firstInput) firstInput.focus();
+        }, 200);
+      }
+
+      closeModal() {
+        this.elements.modal.classList.remove('active');
+        document.body.style.overflow = '';
+        this.resetForm();
+      }
+
+      isModalOpen() {
+        return this.elements.modal.classList.contains('active');
+      }
+
+      resetForm() {
+        this.elements.reviewForm.reset();
+        this.currentRating = 0;
+        this.elements.ratingValue.value = '';
+        this.elements.charCount.textContent = '0';
+        
+        const stars = this.elements.starRating.querySelectorAll('.star-input');
+        stars.forEach(star => {
+          star.classList.remove('filled', 'active');
+        });
+        
+        this.elements.charCount.parentElement.classList.remove('warning');
+        this.hideMessages();
+      }
+
+      async handleSubmit(e) {
+        e.preventDefault();
+        
+        if (this.isSubmitting) return;
+
+        const formData = new FormData(e.target);
+        const reviewData = {
+          name: formData.get('name').trim(),
+          rating: parseInt(formData.get('rating')),
+          review: formData.get('review').trim(),
+          imageUrl: formData.get('imageUrl')?.trim() || null,
+          createdAt: new Date().toISOString()
+        };
+
+        if (!this.validateReview(reviewData)) {
+          return;
+        }
+
+        try {
+          this.setSubmitLoading(true);
+          
+          if (this.db && this.firestoreHelpers) {
+            // Add to Firebase
+            await this.addReviewToFirestore(reviewData);
+          } else {
+            // Add to local storage as fallback
+            this.addReviewLocally(reviewData);
+          }
+          
+          this.showSuccessMessage('Review submitted successfully!');
+          setTimeout(() => {
+            this.closeModal();
+          }, 1000);
+          
+        } catch (error) {
+          console.error('Error submitting review:', error);
+          this.showErrorMessage('Failed to submit review. Please try again.');
+        } finally {
+          this.setSubmitLoading(false);
+        }
+      }
+
+      validateReview(data) {
+        if (!data.name || data.name.length < 1) {
+          this.showErrorMessage('Please enter your name.');
+          return false;
+        }
+
+        if (!data.rating || data.rating < 1 || data.rating > 5) {
+          this.showErrorMessage('Please select a star rating.');
+          return false;
+        }
+
+        if (!data.review || data.review.length < 10) {
+          this.showErrorMessage('Please write a review (minimum 10 characters).');
+          return false;
+        }
+
+        return true;
+      }
+
+      async addReviewToFirestore(reviewData) {
+        const { collection, addDoc, serverTimestamp } = this.firestoreHelpers;
+        const reviewsCollection = collection(this.db, 'googleReviews');
+        
+        await addDoc(reviewsCollection, {
+          ...reviewData,
+          timestamp: serverTimestamp()
+        });
+      }
+
+      addReviewLocally(reviewData) {
+        // Add to beginning of reviews array
+        this.reviews.unshift(reviewData);
+        this.renderReviews();
+        
+        // Save to localStorage
+        localStorage.setItem('nstech-reviews', JSON.stringify(this.reviews));
+      }
+
+      listenForReviews() {
+        if (!this.db || !this.firestoreHelpers) {
+          // Load from localStorage if Firebase not available
+          const savedReviews = localStorage.getItem('nstech-reviews');
+          if (savedReviews) {
+            this.reviews = JSON.parse(savedReviews);
+            this.renderReviews();
+          }
+          return;
+        }
+
+        const { collection, onSnapshot, query, orderBy } = this.firestoreHelpers;
+        
+        try {
+          const reviewsCollection = collection(this.db, 'googleReviews');
+          const reviewsQuery = query(reviewsCollection, orderBy('createdAt', 'desc'));
+          
+          onSnapshot(reviewsQuery, (snapshot) => {
+            const reviews = [];
+            snapshot.forEach((doc) => {
+              reviews.push({ id: doc.id, ...doc.data() });
+            });
+            
+            this.reviews = reviews;
+            this.renderReviews();
+          });
+        } catch (error) {
+          console.error('Error listening to reviews:', error);
+        }
+      }
+
+      renderReviews() {
+        // Update review count
+        this.elements.reviewCount.textContent = this.reviews.length;
+
+        if (this.reviews.length === 0) return;
+
+        // Render review cards
+        this.elements.reviewsList.innerHTML = this.reviews.map((review, index) => 
+          this.createReviewCard(review, index === 0)
+        ).join('');
+      }
+
+      createReviewCard(review, isNew = false) {
+        const date = this.formatDate(review.createdAt);
+        const initials = this.getInitials(review.name);
+        const stars = this.renderStars(review.rating);
+        
+        return `
+          <div class="google-review-card ${isNew ? 'new-review' : ''}">
+            <div class="google-review-header">
+              <div class="google-reviewer-avatar">
+                ${review.imageUrl ? 
+                  `<img src="${review.imageUrl}" alt="${review.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                   <span style="display: none;">${initials}</span>` :
+                  initials
+                }
+              </div>
+              <div class="google-review-info">
+                <div class="google-reviewer-name">
+                  ${this.escapeHtml(review.name)}
+                  <span class="verified-badge">Verified</span>
+                </div>
+                <div class="google-review-meta">
+                  <div class="google-review-stars">${stars}</div>
+                  <div class="google-review-date">${date}</div>
+                </div>
+              </div>
+            </div>
+            <div class="google-review-text">${this.escapeHtml(review.review)}</div>
+          </div>
+        `;
+      }
+
+      getInitials(name) {
+        return name
+          .split(' ')
+          .map(n => n[0])
+          .join('')
+          .substring(0, 2)
+          .toUpperCase();
+      }
+
+      renderStars(rating) {
+        return Array.from({ length: 5 }, (_, i) => 
+          `<span class="star ${i < rating ? 'filled' : ''}">★</span>`
+        ).join('');
+      }
+
+      formatDate(dateString) {
+        const date = new Date(dateString);
+        const now = new Date();
+        const diffTime = Math.abs(now - date);
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        
+        if (diffDays === 0) {
+          return 'Today';
+        } else if (diffDays === 1) {
+          return 'Yesterday';
+        } else if (diffDays < 7) {
+          return `${diffDays} days ago`;
+        } else if (diffDays < 30) {
+          const weeks = Math.floor(diffDays / 7);
+          return `${weeks} week${weeks > 1 ? 's' : ''} ago`;
+        } else if (diffDays < 365) {
+          const months = Math.floor(diffDays / 30);
+          return `${months} month${months > 1 ? 's' : ''} ago`;
+        } else {
+          const years = Math.floor(diffDays / 365);
+          return `${years} year${years > 1 ? 's' : ''} ago`;
+        }
+      }
+
+      escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+      }
+
+      setSubmitLoading(loading) {
+        this.isSubmitting = loading;
+        
+        const btnText = this.elements.submitBtn.querySelector('.btn-text');
+        const btnSpinner = this.elements.submitBtn.querySelector('.btn-spinner');
+        
+        if (loading) {
+          btnText.style.display = 'none';
+          btnSpinner.style.display = 'block';
+          this.elements.submitBtn.disabled = true;
+        } else {
+          btnText.style.display = 'block';
+          btnSpinner.style.display = 'none';
+          this.elements.submitBtn.disabled = false;
+        }
+      }
+
+      showSuccessMessage(message) {
+        this.hideMessages();
+        const messageEl = document.createElement('div');
+        messageEl.className = 'success-message';
+        messageEl.innerHTML = `
+          <span class="material-icons">check_circle</span>
+          ${message}
+        `;
+        this.elements.reviewForm.insertBefore(messageEl, this.elements.reviewForm.firstChild);
+      }
+
+      showErrorMessage(message) {
+        this.hideMessages();
+        const messageEl = document.createElement('div');
+        messageEl.className = 'error-message';
+        messageEl.innerHTML = `
+          <span class="material-icons">error</span>
+          ${message}
+        `;
+        this.elements.reviewForm.insertBefore(messageEl, this.elements.reviewForm.firstChild);
+      }
+
+      hideMessages() {
+        const messages = this.elements.reviewForm.querySelectorAll('.success-message, .error-message');
+        messages.forEach(msg => msg.remove());
+      }
+    }
+
+    // Initialize the component when the DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      new GoogleReviewsComponent();
+    });
   </script>
 
   <!-- Google Forms Handler -->
